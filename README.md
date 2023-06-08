@@ -17,7 +17,7 @@ Welcome to *FlaskBlog*, an innovative, user-friendly application that gives you 
 
 ## 🤝 Contact
 
-Your Name - nwoyechidinma@gmail.com
+Your Name - nwoyechidinma518@gmail.com
 
 Project Link: [Flask Blog](https://github.com/Chidinma-debug/flask-blog)
 
