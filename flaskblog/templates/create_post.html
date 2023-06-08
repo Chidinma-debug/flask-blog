@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action=""> 
+    <!-- action means when you post the form its posts to the same route you are currently on -->
+    <!-- when you are accessing varriables in template, wrap text in 2 curly bracket. Hiidden tag also protects form -->
+        {{form.hidden_tag()}}
+        <fieldset class="form-group">
+        <!-- this form is used for both new and update post so legend is different. Specify legend in route.py -->
+        <legend class ="border-bottom mb-4">{{legend}}</legend>
+        <div class="form-group">
+            <!-- create flash error. Error will occur due to requirement in form.py -->
+            {{form.title.label(class="form-control-label")}}
+            {% if form.title.errors %}
+                {{ form.title(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.title.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{form.title(class="form-control form-control-lg")}}
+            {% endif %}   
+        </div>
+        <div class="form-group">
+            {{form.content.label(class="form-control-label")}}
+            {% if form.content.errors %}
+                {{ form.content(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.content.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{form.content(class="form-control form-control-lg")}}
+            {% endif %}    
+        </div>
+        </fieldset>
+        <div class="form-group">
+            {{form.submit(class="btn btn-outline-info")}}
+        </div>
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{ image_file }}">
+            <div class="media body" style = "display:flex;flex-direction:column">
+                <h2 class="account-heading"> {{ current_user.username }}</h2>
+                <p class="text-secondary"> {{ current_user.email }} </p>
+            </div>
+        </div>
+        <!-- add special encoding type (enctype) to form so that it can pass image data properly -->
+            <form method="POST" action="", enctype="multipart/form-data"> 
+            <!-- action means when you post the form its posts to the same route you are currently on -->
+            <!-- when you are accessing varriables in template, wrap text in 2 curly bracket. Hiidden tag also protects form -->
+                {{form.hidden_tag()}}
+                <fieldset class="form-group">
+                <legend class ="border-bottom mb-4">Account Info</legend>
+                <div class="form-group">
+                    {{form.username.label(class="form-control-label")}}
+                    <!-- to display errors for each field. Errors depends on what is specified in -->
+                    {% if form.username.errors %}
+                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.username(class="form-control form-control-lg") }}
+                    {% endif %}    
+                </div>
+                <div class="form-group">
+                    {{form.email.label(class="form-control-label")}}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{form.email(class="form-control form-control-lg")}}
+                    {% endif %}   
+                </div>
+                <div class="form-group">
+                    {{ form.picture.label() }}
+                    {{ form.picture(class="form-control-file") }}
+                    {% if form.picture.errors %}
+                        {% for error in form.picture.errors %}
+                        <!-- invalid feedback div of class of text danger makes error messages red -->
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                </fieldset>
+                <div class="form-group">
+                    {{form.submit(class="btn btn-outline-info")}}
+                </div>
+            </form> 
+    </div>
+{% endblock content %}
